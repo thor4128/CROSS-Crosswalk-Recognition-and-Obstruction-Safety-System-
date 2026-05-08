@@ -1,22 +1,52 @@
 //Fill in pins 2, 3, 4, and 5 with correct pins with our arduino.
 //Pins two through 10.
-const red_ns = 2;
-const yellow_ns = 3;
-const green_ns = 4;
-const blue_ns = 5;
+#include "Arduino_LED_Matrix.h"
 
-const red_ew = 6;
-const yellow_ew = 7;
-const green_ew = 8;
-const blue_ew = 9;
+ArduinoLEDMatrix matrix;
+
+const int red_ns = 2;
+const int yellow_ns = 3;
+const int green_ns = 4;
+const int blue_ns = 5;
+
+const int red_ew = 6;
+const int yellow_ew = 7;
+const int green_ew = 8;
+const int blue_ew = 9;
 
 
-const crosswalk_border_crossed = 6;
+const int crosswalk_border_crossed = A0;
 int crosswalk_border_value = 0;
+
+//12 columns x 8 rows
+//"ON"
+byte onFrame[8][12] = {
+  {0,1,1,0, 0,1,0,0, 0,1,0,0},
+  {1,0,0,1, 0,1,1,0, 0,1,0,0},
+  {1,0,0,1, 0,1,0,1, 0,1,0,0},
+  {1,0,0,1, 0,1,0,0,1,1,0,0},
+  {1,0,0,1, 0,1,0,0,0,1,0,0},
+  {1,0,0,1, 0,1,0,0,0,1,0,0},
+  {1,0,0,1, 0,1,0,0,0,1,0,0},
+  {0,1,1,0, 0,1,0,0,0,1,0,0}
+};
+
+//"OFF"
+byte offFrame[8][12] = {
+  {0,1,1,0, 0,1,1,1, 0,1,1,1},
+  {1,0,0,1, 0,1,0,0, 0,1,0,0},
+  {1,0,0,1, 0,1,0,0, 0,1,0,0},
+  {1,0,0,1, 0,1,1,0, 0,1,1,0},
+  {1,0,0,1, 0,1,0,0, 0,1,0,0},
+  {1,0,0,1, 0,1,0,0, 0,1,0,0},
+  {1,0,0,1, 0,1,0,0, 0,1,0,0},
+  {0,1,1,0, 0,1,0,0, 0,1,0,0}
+};
 
 
 void setup() 
 {
+  matrix.begin();
   //Initialize lights as outputs.
   pinMode(red_ns, OUTPUT);
   pinMode(yellow_ns, OUTPUT);
@@ -48,6 +78,10 @@ void loop()
   digitalWrite(green_ew, HIGH);
   digitalWrite(blue_ew, HIGH);
 
+  showOn();
+
+  Serial.println("lights are On");
+
   //digitalWrite(light_Yellow, HIGH);
   //digitalWrite(light_Green, HIGH);
   //digitalWrite(light_Blue, HIGH);
@@ -78,6 +112,10 @@ void loop()
   digitalWrite(green_ew, LOW);
   digitalWrite(blue_ew, LOW);
 
+  showOff();
+
+  Serial.println("lights are off");
+
   //Delay for 1 second.
   delay(1000);
   
@@ -100,4 +138,12 @@ void loop()
 
   
 
+}
+
+void showOn(){
+  matrix.renderBitmap(onFrame, 8, 12);
+}
+
+void showOff(){
+  matrix.renderBitmap(offFrame, 8, 12);
 }
