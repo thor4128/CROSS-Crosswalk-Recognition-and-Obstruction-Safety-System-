@@ -1,4 +1,3 @@
-
 //Fill in pins 2, 3, 4, and 5 with correct pins with our arduino.
 //Pins two through 10.
 const red_ns = 2;
@@ -44,10 +43,10 @@ void loop()
   digitalWrite(yellow_ns, HIGH);
   digitalWrite(green_ns, HIGH);
   digitalWrite(blue_ns, HIGH);
-  digitalWrite(red_ns, HIGH);
-  digitalWrite(red_ns, HIGH);
-  digitalWrite(red_ns, HIGH);
-  digitalWrite(red_ns, HIGH);
+  digitalWrite(red_ew, HIGH);
+  digitalWrite(yellow_ew, HIGH);
+  digitalWrite(green_ew, HIGH);
+  digitalWrite(blue_ew, HIGH);
 
   //digitalWrite(light_Yellow, HIGH);
   //digitalWrite(light_Green, HIGH);
@@ -70,10 +69,14 @@ void loop()
  
 
   //Lights turn off.
-  digitalWrite(light_RED, LOW);
-  //digitalWrite(light_Yellow, LOW);
-  //digitalWrite(light_Green, LOW);
-  //digitalWrite(light_Blue, LOW);
+  digitalWrite(red_ns, LOW);
+  digitalWrite(yellow_ns, LOW);
+  digitalWrite(green_ns, LOW);
+  digitalWrite(blue_ns, LOW);
+  digitalWrite(red_ew, LOW);
+  digitalWrite(yellow_ew, LOW);
+  digitalWrite(green_ew, LOW);
+  digitalWrite(blue_ew, LOW);
 
   //Delay for 1 second.
   delay(1000);
