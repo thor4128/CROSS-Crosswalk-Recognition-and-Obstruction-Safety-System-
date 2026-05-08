@@ -1,0 +1,3 @@
+  date       signature             to what?                                   what changed? and why?
+--------    -----------    ------------------------------      --------------------------------------------------------------
+5/8/26          kr                   all                                    original file creation, to start
