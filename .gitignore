@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Arduino build files
+build/
+*.hex
+*.elf
+*.bin
+*.map
+
+# VS Code local settings
+.vscode/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
