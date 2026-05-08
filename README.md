@@ -46,3 +46,6 @@ python3 jetson_crosswalk_monitor.py --source sample.mp4 --model yolov8n.onnx --c
 - A vehicle is flagged when at least `15%` of its box overlaps the detected crosswalk polygon. Tune this with `--intrusion-ratio`.
 - If your model uses `motorcycle` instead of `motorbike`, the code already handles both.
 - For production use, you will likely want to calibrate the camera view and replace the heuristic crosswalk detector with a trained segmentation model.
+
+# CROSS-Crosswalk-Recognition-and-Obstruction-Safety-System-
+CROSS: Computer vision system that detects and records vehicles obstructing marked crosswalks.
