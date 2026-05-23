@@ -1,3 +1,4 @@
   date       signature             to what?                                   what changed? and why?
 --------    -----------    ------------------------------      --------------------------------------------------------------
 5/8/26          kr                   all                                    original file creation, to start
+5/22/26         ds               synch lights                           synchronization of lights file uploaded
