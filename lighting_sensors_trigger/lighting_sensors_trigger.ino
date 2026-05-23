@@ -1,20 +1,26 @@
-//Fill in pins 2, 3, 4, and 5 with correct pins with our arduino.
-//Pins two through 10.
+//Author: Donavin S.
+//Reviewer: Kody R.
+//Senior Design
+//Traffic Pattern LEDs with Sensor for Motion Detection
+
+//Fill in pins 2, 3, 4, 5, 6, 7, 8, and 9 with correct pins with our arduino.
 #include "Arduino_LED_Matrix.h"
 
 ArduinoLEDMatrix matrix;
 
+//Street facing north and south uses 4 lights, with pins 2 through 5.
 const int red_ns = 2;
 const int yellow_ns = 3;
 const int green_ns = 4;
 const int blue_ns = 5;
 
+//Street facing east and west uses 4 lights, with pins, 6 through 9.
 const int red_ew = 6;
 const int yellow_ew = 7;
 const int green_ew = 8;
 const int blue_ew = 9;
 
-
+//Variables for motion sensor detection.
 const int crosswalk_border_crossed = A0;
 int crosswalk_border_value = 0;
 
@@ -46,13 +52,18 @@ byte offFrame[8][12] = {
 
 void setup() 
 {
+
   matrix.begin();
+
   //Initialize lights as outputs.
+  //These are the LEDs for the North and South Traffic Light.
   pinMode(red_ns, OUTPUT);
   pinMode(yellow_ns, OUTPUT);
   pinMode(green_ns, OUTPUT);
   pinMode(blue_ns, OUTPUT);
 
+  //Initialize lights as outputs.
+  //These are the LEDs for the East and West Traffic Light.
   pinMode(red_ew, OUTPUT);
   pinMode(yellow_ew, OUTPUT);
   pinMode(green_ew, OUTPUT);
@@ -60,90 +71,88 @@ void setup()
 
   //Initialize sensor as input.
   pinMode(crosswalk_border_crossed, INPUT);
+
   Serial.begin(9600); //115200 //9600 common for printer cable
 
 }
 
 void loop() 
 {
-  // put your main code here, to run repeatedly:
 
-  //Lights turn on.
-  digitalWrite(red_ns, HIGH);
-  digitalWrite(yellow_ns, HIGH);
-  digitalWrite(green_ns, HIGH);
-  digitalWrite(blue_ns, HIGH);
-  digitalWrite(red_ew, HIGH);
-  digitalWrite(yellow_ew, HIGH);
-  digitalWrite(green_ew, HIGH);
-  digitalWrite(blue_ew, HIGH);
-
-  showOn();
-
-  Serial.println("lights are On");
-
-  //digitalWrite(light_Yellow, HIGH);
-  //digitalWrite(light_Green, HIGH);
-  //digitalWrite(light_Blue, HIGH);
-
- // if(digitalRead(red_ns) == HIGH)
-  //{
-    //Serial.println("red_ns is on");
-  //}
-
-  //else
-  //{
-    //Serial.println("red_ns is off");
-  //}
-
-  //Delay for 1 second, delay(500) is 0.5 seconds
-  delay(1000);
-
-
- 
-
+  crosswalk_border_value = analogRead(crosswalk_border_crossed);
+  
   //Lights turn off.
-  digitalWrite(red_ns, LOW);
+  //All are off, except red LEDs.
+  digitalWrite(red_ns, HIGH);
   digitalWrite(yellow_ns, LOW);
   digitalWrite(green_ns, LOW);
   digitalWrite(blue_ns, LOW);
   digitalWrite(red_ew, LOW);
   digitalWrite(yellow_ew, LOW);
-  digitalWrite(green_ew, LOW);
+  digitalWrite(green_ew, HIGH);
   digitalWrite(blue_ew, LOW);
-
-  showOff();
-
-  Serial.println("lights are off");
-
-  //Delay for 1 second.
-  delay(1000);
   
-  //Have a sensor.
-  //sensor_VALUE = digitalRead(sensor_PIN_6);
-  //
-  //if(sensor_VALUE == HIGH)
-  //{
-    //Serial.println("Detected something.");
-  //}
+ //red_ns LED stays HIGH for 45 seconds.
+ //Red light time might be 30 to 90 seconds standard intersection.
+ delay(90000);
+ //delay(45000);
+ //delay(10000);
 
-  //else
-  //{
-    //Serial.println("Nothing detected.");
-  //}
+ /* red_ns transitions into green_ns
+  * 
+  * This means that after 45 seconds, green_ew turns off, because there is 6 seconds of yellow_ew on.
+  * 
+  * Then, once yellow_ew is done, red_ew turns on, and green_ns turns on.
+  */
 
-  //Have a delay of 0.5 seconds for the sensor.
- // delay(500);
+ //Yellow for EW turns on for 5 seconds.
+ digitalWrite(green_ew, LOW);
+ digitalWrite(yellow_ew, HIGH);
+ delay(5000);
+
+ digitalWrite(red_ns, HIGH);
+ digitalWrite(red_ew, HIGH);
+ digitalWrite(yellow_ew, LOW);
+
+ //Delay with both lights being red, (waiting for the transition of one Green LED to turn on).
+ //Waiting for the intersection to be clear.
+ delay(3000);
+
+ //Then, red_ns LED turns off, and green_ns turns on and red_ew turns on.
+ //Then yellow_ew also turns off, since the next traffic pattern will occur.
+ digitalWrite(red_ns, LOW);
+ digitalWrite(green_ns, HIGH);
+ digitalWrite(red_ew, HIGH);
+ digitalWrite(yellow_ew, LOW);
+
+ //North South Green LED stays green for 60 seconds/red_ew is HIGH for 45 seconds.
+ //Red light time might be 90 seconds standard intersection.
+ delay(90000);
+ //delay(45000);
+ //delay(10000);
 
 
-  
+//Once green_ns LED turns off, yellow_ns ON for 5 seconds.
+ digitalWrite(green_ns, LOW);
+ digitalWrite(yellow_ns, HIGH);
+ delay(5000);
+
+ digitalWrite(red_ns, HIGH);
+ digitalWrite(red_ew, HIGH);
+ digitalWrite(yellow_ns, LOW);
+
+//Delay with both lights being red, (waiting for the transition of one Green LED to turn on).
+//Waiting for the intersection to be clear.
+ delay(3000);
 
 }
 
-void showOn(){
+void showOn()
+{
   matrix.renderBitmap(onFrame, 8, 12);
 }
 
-void showOff(){
+void showOff()
+{
   matrix.renderBitmap(offFrame, 8, 12);
 }
