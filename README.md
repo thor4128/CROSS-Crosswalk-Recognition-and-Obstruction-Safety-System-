@@ -6,7 +6,7 @@ This is a Jetson-friendly Python prototype that:
 - detects road vehicles with a YOLO ONNX model
 - raises an alert when a vehicle box overlaps the crosswalk
 
-## Files
+## Files   
 
 - `jetson_crosswalk_monitor.py`: main application
 - `requirements.txt`: Python dependencies
