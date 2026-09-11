@@ -3,11 +3,9 @@
 5/8/26          kr                   all                                            original file creation, to start
 5/22/26         ds         lighting_sensors_trigger.ino                             synchronization of lights file uploaded
                                                   
-9/10/26         ds          unit test python files
-7/17/26                                                                                   made 10 second video interval for camera 1 script
-7/17/26                                                                             made script to run screenshots within 10 second video for camera 2
-8/14/26                                                                             made an additional info script (part_2) file to manipulate from base file 
-8/27/26                                                                             new file to get 10 sec video to connect to database
-9/3/26                                                                              testing first connection to database
-9/4/26                                                                              new file for getting screenshots based on SR04 sensor distance
+7/17/26         ds         unit test python files                                   10 second video interval for camera 1 script
+                                                                                    script to run screenshots within 10 second video for camera 2
+-                                                                                   additional info script (part_2) file to manipulate from base file                                                   
+                                                                                    new file to get 10 sec video to connect to database                                                                            testing first connection to database
+9/10/26                                                                             new file for getting screenshots based on SR04 sensor distance
 
