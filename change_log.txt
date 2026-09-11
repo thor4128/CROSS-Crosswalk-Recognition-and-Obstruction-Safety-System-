@@ -2,3 +2,9 @@
 --------    -----------    ------------------------------      --------------------------------------------------------------
 5/8/26          kr                   all                                    original file creation, to start
 5/22/26         ds               synch lights                           synchronization of lights file uploaded
+7/17/26         ds           camera 1 video interval                 made 10 second video interval for camera 1 script
+7/17/26         ds            screenshots and video             made script to run screenshots within 10 second video for camera 2
+8/14/26         ds          another info script file          made an additional info script (part_2) file to manipulate from base file 
+8/27/26         ds         script creation for database             new file to get 10 sec video to connect to database
+9/3/26          ds                 database                                testing first connection to database
+9/4/26          ds         image collection with sensor          new file for getting screenshots based on SR04 sensor distance
