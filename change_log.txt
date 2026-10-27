@@ -9,3 +9,5 @@
                                                                                     new file to get 10 sec video to connect to database                                                                            testing first connection to database
 9/10/26                                                                             new file for getting screenshots based on SR04 sensor distance
 
+10/27/26      ds/kr       lighting_sensors_trigger.ino                              integrated lighting and sensor together
+                          crosswalk_detection_cv.python                             received signal from sensor and printed result
